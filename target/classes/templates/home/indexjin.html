@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Welcome to your jinJava Home!</title>
+</head>
+
+<body>
+
+
+{% if currentUser %}
+Welcome, {{ currentUser.firstName }} ({{ currentUser.email }})
+<a href="/logout">Logout</a>
+
+{% else %}
+ <a href="/login">Login</a>
+ <a href="/signUp">SignUp</a>
+ 
+{% endif %}
+
+<a href="/apartments/new">List A New Apartment</a>
+<h1>Apartments!</h1>
+
+	{% for apartment in apartments %}
+   		<div>
+		<a href="/apartments/{{ apartment.id }}">{{ apartment.address }}</a>
+		</div>
+	{% endfor %}
+	
+</body>
+</html>

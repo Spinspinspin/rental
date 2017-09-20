@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Who dis?</title>
+</head>
+<body>
+
+<Form method="post" action="/login">
+	<input type="email" required name="email" placeholder="Your email">
+	<input type="password" name="password" placeholder="Your password">
+	<button>Login</button>
+	<input type="hidden" name="returnPath" value="{{ returnPath}}">
+</Form>
+
+</body>
+</html>

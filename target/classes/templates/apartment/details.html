@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Your next home</title>
+</head>
+<body>
+
+
+<h1>Only: ${{ apartment.rent }}</h1>
+<p>
+  {{ apartment.address }}<br>
+  {{ apartment.city }}, {{ apartment.state }} {{ apartment.zipCode }}
+</p>
+
+	<dl>
+		<dt>Number of bedrooms:</dt>
+		<dd>{{ apartment.numberOfBr }}</dd>
+		<dt>Number of bathrooms:</dt>
+		<dd>{{ apartment.numberOfWc }}</dd>
+		<dt>Square Footage:</dt>
+		<dd>{{ apartment.squareFootage }}
+
+	</dl>
+
+</body>
+</html>
