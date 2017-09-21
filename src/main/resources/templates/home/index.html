@@ -12,7 +12,9 @@
 	<h1>Apartments!</h1>
 	{{#apartments}}
 		<div>
+		{{#isActive}}	
 		<a href="/apartments/{{ id }}">{{ address }}</a>
+		{{/isActive}}	
 		</div>
 	{{/apartments}}
 </body>

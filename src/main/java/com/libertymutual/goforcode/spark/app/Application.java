@@ -2,11 +2,9 @@ package com.libertymutual.goforcode.spark.app;
 
 import static spark.Spark.*;
 
-import java.io.StringWriter;
-import java.util.HashMap;
-import java.util.Map;
 
-import org.javalite.activejdbc.Base;
+
+
 import org.mindrot.jbcrypt.BCrypt;
 
 import com.libertymutual.goforcode.spark.app.controllers.ApartmentApiController;
@@ -19,8 +17,7 @@ import com.libertymutual.goforcode.spark.app.models.Apartment;
 import com.libertymutual.goforcode.spark.app.models.User;
 import com.libertymutual.goforcode.spark.app.utilities.AutoCloseableDb;
 
-import spark.Request;
-import spark.Response;
+
 
 public class Application {
 
@@ -34,26 +31,28 @@ public class Application {
 			dan.saveIt();
 			
 			Apartment.deleteAll();
-			Apartment apartment = new Apartment(6000, 1, 0, 350, "123 Main St.", "San Francisco", "CA", "95125");
-			apartment.saveIt();
+			Apartment apartment = new Apartment(6000, 1, 0, 350, "123 Main St.", "San Francisco", "CA", "95125", true);
 			dan.add(apartment);
+			apartment.saveIt();
 			
-			apartment = new Apartment(1459, 5, 6, 4000, "123 Coyboy Way.", "Houston", "TX", "77006");
-			apartment.saveIt();
+			apartment = new Apartment(1459, 5, 6, 4000, "123 Coyboy Way.", "Houston", "TX", "77006", false);
 			dan.add(apartment);
+			apartment.saveIt();
 
 		}
 		path("/apartments", () -> {
-			before("/new", 		SecurityFilters.isAuthenticated);
-			get("/new", 		ApartmentController.newForm);
+			before("/new", 					SecurityFilters.isAuthenticated);
+			get("/new", 					ApartmentController.newForm);
 			
-			before("/mine", 	SecurityFilters.isAuthenticated);
-			get("/mine", 		ApartmentController.index);
+			before("/mine", 				SecurityFilters.isAuthenticated);
+			get("/mine", 					ApartmentController.index);
 			
-			get("/:id",		 	ApartmentController.details);
+			get("/:id",		 				ApartmentController.details);
+			post("/:id/activations", 		ApartmentController.activate);
+//			post("/:id/deactivations", 		ApartmentController.deactivate);
 			
-			before("", 			SecurityFilters.isAuthenticated);
-			post("", 			ApartmentController.create);
+			before("", 						SecurityFilters.isAuthenticated);
+			post("", 						ApartmentController.create);
 		});
 
 		get("/", 			HomeController.index);
@@ -62,7 +61,7 @@ public class Application {
 		
 		post("/logout", 	SessionController.destroy);
 		
-		get("/users/new", 		UserController.newForm);
+		get("/users/new", 	UserController.newForm);
 		post("/users/new", 	UserController.create);
 
 		path("/api", () -> {
