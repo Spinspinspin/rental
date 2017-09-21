@@ -19,19 +19,18 @@ import spark.Route;
 
 public class HomeController {
 
-
-	
-	public static final Route indexjin = (Request req, Response res) -> {
-		try (AutoCloseableDb db = new AutoCloseableDb()) {
-		Jinjava jinjava = new Jinjava();
-		List<Apartment> apartments = Apartment.findAll();
-		Map<String, Object> context = Maps.newHashMap();
-		context.put("apartments", apartments);
-		context.put("currentUser", req.session().attribute("currentUser"));		
-		String template = Resources.toString(Resources.getResource("templates/home/indexjin.html"), Charsets.UTF_8);
-		String renderedTemplate = jinjava.render(template, context);
-		return renderedTemplate;
+	public final static Route index = (Request req, Response res) -> {
+		
+		try(AutoCloseableDb db = new AutoCloseableDb()) {
+			List<Apartment> apartments = Apartment.findAll(); 		
+			Map<String, Object> model = new HashMap<String, Object>(); 
+			model.put("apartments", apartments);
+			model.put("currentUser", req.session().attribute("currentUser"));
+			model.put("noUser",  req.session().attribute("currentUser") == null); 
+			return MustacheRenderer.getInstance().render("home/index.html", model); 
+			
 		}
+		
 	};
 	
 }
