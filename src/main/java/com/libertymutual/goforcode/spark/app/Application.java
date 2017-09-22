@@ -29,6 +29,9 @@ public class Application {
 			User.deleteAll();
 			User dan = new User("1@1.com", encryptedPassword, "Dan", "Spin");
 			dan.saveIt();
+			User notDan = new User("2@2.com", encryptedPassword, "Dan", "Spin");
+			notDan.saveIt();
+			
 			
 			Apartment.deleteAll();
 			Apartment apartment = new Apartment(6000, 1, 0, 350, "123 Main St.", "San Francisco", "CA", "95125", true);
@@ -49,7 +52,8 @@ public class Application {
 			
 			get("/:id",		 				ApartmentController.details);
 			post("/:id/activations", 		ApartmentController.activate);
-//			post("/:id/deactivations", 		ApartmentController.deactivate);
+			post("/:id/deactivations", 		ApartmentController.deactivate);
+			post("/:id/like",  				ApartmentController.like);
 			
 			before("", 						SecurityFilters.isAuthenticated);
 			post("", 						ApartmentController.create);

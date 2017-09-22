@@ -1,5 +1,7 @@
 package com.libertymutual.goforcode.spark.app.models;
 
+import java.util.List;
+
 import org.javalite.activejdbc.Model;
 
 public class User extends Model {
@@ -46,5 +48,11 @@ public class User extends Model {
 
 	public void setLastName(String lastName) {
 		set("last_name", lastName);
+	}
+
+
+	public static List<User> where(boolean equals) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }	

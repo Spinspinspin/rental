@@ -9,9 +9,43 @@
 {{> /_navigation }}
 <h1>Only: ${{ apartment.rent }}</h1>
 
-<form method="post" action="apartments/{{id}}/activations">
+
+{{#currentUser}}
+{{^owner}}
+
+{{^liker}}	
+<form method="post" action="/apartments/{{ apartment.id }}/like">
+<button>Like this apartment</button>
+</form>
+{{/liker}}
+
+
+{{/owner}}
+{{/currentUser}}
+
+{{^currentUser}}
+<a href="/login?returnPath=/apartments/{{ apartment.id }}">Login to LIKE this apartment</a>
+{{/currentUser}}
+
+{{#owner}}
+
+{{#liker}}
+Who likes this:	{{ firstName }} {{ lastName }}
+{{/liker}}
+
+{{#apartment.isActive}}
+<form method="post" action="/apartments/{{ apartment.id }}/deactivations">
+<button>Deactivate listing</button>
+</form>
+{{/apartment.isActive}}
+
+{{^apartment.isActive}} <!-- Found this in documentation! -->
+<form method="post" action="/apartments/{{ apartment.id }}/activations">
 <button>Activate listing</button>
 </form>
+{{/apartment.isActive}}
+
+{{/owner}}
 <p>
   {{ apartment.address }}<br>
   {{ apartment.city }}, {{ apartment.state }} {{ apartment.zipCode }}

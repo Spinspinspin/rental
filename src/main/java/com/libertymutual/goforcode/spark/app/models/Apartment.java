@@ -2,6 +2,8 @@ package com.libertymutual.goforcode.spark.app.models;
 
 
 
+
+
 import org.javalite.activejdbc.Model;
 
 public class Apartment extends Model {
@@ -93,6 +95,9 @@ public class Apartment extends Model {
 		public void setNumberOfBathrooms(double numberOfBathrooms) {
 			set("number_of_bathrooms", numberOfBathrooms);
 		}
+
+		
+
 		
 		
 		
